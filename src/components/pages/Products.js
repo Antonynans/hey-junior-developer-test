@@ -8,26 +8,9 @@ import withRouter from "./withRouter";
 import { addToCart } from "../../redux/actions/cartSlice";
 import { connect } from "react-redux";
 import AddToCartForm from "../addToCart";
+import DOMPurify from "dompurify";
 
 
-// const GET_PRODUCT = gql`
-// query{
-//   product(id: ${productIds}){
-//     description
-//     id
-//     name
-//     prices{
-//       currency{
-//         label
-//         symbol
-//       }
-//       amount
-//     }
-//     brand
-//     category
-//   }
-// }
-// `;
 const color1 = '#1D1F22';
 const btnColor = '#5ECE7B';
 
@@ -189,7 +172,7 @@ export class Products extends Component {
 
   render() {
 	
-      console.log(this.state, this.state.productData)
+      console.log(this.state, this.state.productData?.name)
 
     return (
       <>
@@ -271,8 +254,10 @@ export class Products extends Component {
             								// onClick={() => inStock && this.addToCart(id, gallery, brand, name, prices, attributes)}
                             onClick={() => this.addToCart()}
             >ADD TO CART</Button> */}
-            <Text className="desc">
-            {this.state.productData?.description?.replace(/<[^>]+>/g, '')}</Text>
+            <Text className="desc"  dangerouslySetInnerHTML={{
+							__html: DOMPurify.sanitize(this.state.productData.product?.description)}}>
+           
+						</Text>
           </Div>
         </Div>
       </>
@@ -280,5 +265,4 @@ export class Products extends Component {
   }
 }
 
-// export default connect(mapStateToProps, { addToCart })(withRouter(Products));
 export default withRouter(Products);

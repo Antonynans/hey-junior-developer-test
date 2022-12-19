@@ -4,9 +4,10 @@ import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import cart from "./assets/cart.svg";
 import { request } from "graphql-request";
-import { GET_CATEGORIES } from "../gql/Query";
+import { GET_CATEGORIES, GET_PRICES } from "../gql/Query";
 import withRouter from "./pages/withRouter";
 import CartComponent from "./cartComponent";
+import CurrencyDropDown from "./currencyDropDown";
 // import { CartContextConsumer } from "../context/cartContext";
 
 /*
@@ -149,6 +150,7 @@ class Navbar extends React.PureComponent {
     this.state = {
       displayNav: props.displayNav ? "flex" : "none",
       productData: {},
+      priceData: {},
     };
   }
   toggleNavBar() {
@@ -175,10 +177,18 @@ class Navbar extends React.PureComponent {
     }).then((data) => {
       this.setState({ productData: data });
     });
+
+    request({
+      url: "http://localhost:4000/",
+      document: GET_PRICES,
+      // variables: variables,
+    }).then((data) => {
+      this.setState({ priceData: data });
+    });
   }
 
   render() {
-    // console.log(this.state.productData.categories?.map(({ name }, index) => name));
+    console.log(this.state.priceData, 'datata')
 
     return (
       <Bar>
@@ -187,19 +197,14 @@ class Navbar extends React.PureComponent {
         </NavBarToggle>
         <MainNav display={this.state.displayNav}>
           {this.state.productData.categories?.map(({ name }, i) => (
-            <NavLi>
+            <NavLi key={i}>
               <NavLinks to={`/category/${name}`} key={i}>
                 {name}
               </NavLinks>
             </NavLi>
           ))}
 
-          {/* <NavLi>
-            <NavLinks to="/">MEN</NavLinks>
-          </NavLi>
-          <NavLi>
-            <NavLinks to="/">KIDS</NavLinks>
-          </NavLi> */}
+        
         </MainNav>
         <svg
           width="33"
@@ -242,13 +247,7 @@ class Navbar extends React.PureComponent {
         </svg>
 
         <MainNav display={this.state.displayNav}>
-          <NavLi>
-            <select name="currency" id="currency">
-              <option value="usd">$ USD</option>
-              <option value="eur">&euro; EUR</option>
-              <option value="jpy">&yen; JPY</option>
-            </select>
-          </NavLi>
+          <CurrencyDropDown prices={this.state.priceData?.currencies} />
           <NavLi>
             <Div>
               {/* <Img src={cart} alt="" className="" /> */}

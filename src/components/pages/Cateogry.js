@@ -5,9 +5,7 @@ import hoverCartIcon from "../assets/hoverCartIcon.svg";
 import { request } from "graphql-request";
 import { GET_CATEGORY } from "../../gql/Query";
 import withRouter from "./withRouter";
-import { connect } from "react-redux";
-import { addToCart } from "../../redux/actions/cartSlice";
-// import { cartSlice } from "../../../redux/actions/cartSlice";
+
 
 const Divs = styled.div`
   width: 100%;
@@ -81,10 +79,6 @@ const Text = styled.p`
   }
 `;
 
-const mapStateToProps = state => ({
-	currentCurrency: state.cart.currentCurrency,
-	products: state.cart.products,
-});
 
 export class Main extends Component {
   state = { productData: {} };
@@ -171,5 +165,4 @@ export class Main extends Component {
   }
 }
 
-// export default withRouter(Main);
-export default connect(mapStateToProps, { addToCart })(withRouter(Main));
+export default withRouter(Main);

@@ -46,27 +46,70 @@ class CartContextProvider extends Component {
       sum += item.data.product.prices[selectedCurrencyIndex || 0].amount * item.quantity;
       symbol = item.data.product.prices[selectedCurrencyIndex || 0].currency.symbol;
     });
-    return sum.toFixed(2) + " " + symbol;
+    return symbol + sum.toFixed(2);
   };
 
-  changeProductQuantity = (product, quantity) => {
-    const productToUpdate = this.state.cart.find(
-      (element) =>
-        JSON.stringify(element.attributes) ===
-        JSON.stringify(product.attributes)
-    );
+  // changeProductQuantity = (product, quantity) => {
+  //   const productToUpdate = this.state.cart.find(
+  //     (element) =>
+  //       JSON.stringify(element.attributes) ===
+  //       JSON.stringify(product.attributes)
+  //   );
 
-    let quant = (productToUpdate.quantity += quantity);
-    productToUpdate.quantity = quant;
+  //   let quant = (productToUpdate.quantity += quantity);
+  //   productToUpdate.quantity = quant;
 
-    this.setState(prev => (
-      {...prev}
-    ))
+  //   this.setState(prev => (
+  //     {...prev}
+  //   ))
+  // }
+  updateCart = (id, isDecrease) => {
+    const isExist = this.state.cart?.find((item) => item.id === id)
+    if (!isExist) {
+      return false
+    }
+
+    if (isExist.quantity === 1 && isDecrease) {
+      return this.state.cart?.filter(obj => {
+        return obj.id !== id
+      })
+    }
+
+    return this.state.cart?.map(obj => {
+      if (obj.id === id) {
+        return {
+          ...obj,
+          quantity: isDecrease ? isExist.quantity - 1 : isExist.quantity + 1,
+        }
+      }
+      return obj
+    })
+  }
+
+  increase = (id) => {
+    const newCart = this.updateCart(id)
+    if (newCart) {
+      this.setState({cart: newCart})
+    } else {
+      const product = { quantity: 1, id: id }
+      this.setState(prev => (prev ? [...prev, product] : [product]))
+    }
+  }
+
+  decrease = (id) => {
+    const newCart = this.updateCart(id, true)
+    if (newCart) {
+      this.setState({cart: newCart})
+    }
   }
 
   removeFromCart = (id, attributes) => {
+   
+      // const newCartItems = this.state.cart?.filter((item) => item.id !== id || item?.attributes !== attributes);
+      // this.setState({ cart: newCartItems});
+    
     this.setState({
-      cart: this.state.cart.filter((item) => JSON.stringify(item.attributes) !== JSON.stringify(attributes) || item.id !== id),
+      cart: this.state.cart?.filter((item) => JSON.stringify(item?.attributes) !== JSON.stringify(attributes) || item?.id !== id),
     });
   };
 

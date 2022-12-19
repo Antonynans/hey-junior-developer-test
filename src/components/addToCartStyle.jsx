@@ -47,6 +47,10 @@ export const Div = styled.div`
 
       color: white;
     }
+    /* &:active {
+      background: ${color1};
+      color: white;
+    } */
     
   }
   &.selected-div {
@@ -56,6 +60,7 @@ export const Div = styled.div`
   &.size-div {
     display: flex;
     gap: 0.2rem;
+   
   }
   &.price-div {
     display: flex;
@@ -69,6 +74,60 @@ export const Div = styled.div`
     font-weight: 700;
     font-size: 24px;
   }
+  &.cartItemDiv {
+    width: 293px;
+    height: 538px;
+    margin-bottom: 32px;
+
+  }
+  &.cartItemComponent {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+  &.cart-item {
+    width: 50%;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+  }
+  &.attr-container {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: baseline;
+  };
+  &.attr-div {
+    display: flex;
+    /* gap: 1rem; */
+    justify-content: space-between;
+    width: 100%;
+  }
+  &.gallery-div {
+    display: flex;
+  }
+`;
+
+export const Divs = styled.div`
+border: 1px solid ${color1};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${({ bgColor }) => (bgColor ? bgColor : "transparent")};
+    width: auto;
+    min-width: 16px;
+    height: 16px;
+    padding: .2rem;
+    /* outline: ${({ name, value, currentAttributes }) =>
+		currentAttributes.some(
+			currentAttribute => Object.keys(currentAttribute)[0] === name && Object.values(currentAttribute)[0] === value,
+		) && "1px solid var(--accent-color)"}; */
+
+
+    &.selected-div {
+      background: ${color1};
+      color: white;
+    }
 `;
 
 export const Img = styled.img`
@@ -92,6 +151,14 @@ export const Img = styled.img`
     cursor: pointer;
     transition: 0.3s ease-in-out;
   }
+  &.cart-img {
+  width: 121px;
+  height: 190px;
+}
+  /* cursor: pointer; */
+  @media (min-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const Text = styled.p`
@@ -111,7 +178,7 @@ margin: 0;
   font-weight: 700;
   font-size: 18px;
   margin-top: 1.5rem;
-
+  
 }
 &.desc {
   font-family: 'Roboto', sans-serif;
@@ -119,14 +186,14 @@ margin: 0;
 `;
 
 export const Button = styled.button`
-  color: white;
-  background-color: ${btnColor};
-color: white;
+      width: 24px;
+    height: 24px;
+    font-size: 15px;
 font-weight: 600;
-  height: 3.25rem;
+  /* height: 3.25rem; */
   cursor: pointer;
   border: none;
   outline: none;
-  width: 100%;
+  /* width: 100%; */
   margin-bottom: 3rem;
 `;

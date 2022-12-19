@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { CartContextConsumer } from "../context/cartContext";
 import { CurrencyContextConsumer } from "../context/currencyContext";
-import { Button, Div, Img, Span, Text } from "../Style";
+import { BackDrop, Button, Div, Dropdown, Img, Span, Text } from "../Style";
 import cartImg from "./assets/cart.svg";
-import CartItemCard from './cardItemCart';
+import CartItemCard from "./cardItemCart";
 
 class CartComponent extends Component {
   state = { isToggleCart: false };
@@ -27,8 +27,12 @@ class CartComponent extends Component {
   }
 
   handleClickOutside = (event) => {
-    if (!event.target.closest(".mini_cart") || event.target.matches(".overlay"))
-    {this.setState({ isToggleCart: false });}
+    if (
+      !event.target.closest(".mini_cart") ||
+      event.target.matches(".cart-overlay")
+    ) {
+      this.setState({ isToggleCart: false });
+    }
   };
 
   componentDidMount() {
@@ -39,51 +43,64 @@ class CartComponent extends Component {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
 
-
-  
-
   render() {
     // console.log(this.state.isToggleCart, 'toggle');
     return (
       <div>
         <CartContextConsumer>
           {({ cart, getTotalInCartItemsQuantity, getTotalPrice }) => (
-            <Div className="mini_cart">
-              {console.log('cart', cart, cart.map((item) => item))}
-              <Div className="cartContainer" onClick={this.toggleCart}>
-                <Img src={cartImg} alt="" className="" />
+            <Div className="mini_cart" onClick={this.toggleCart}>
+              {/* <Div className="cartContainer"> */}
+              <Img src={cartImg} alt="" className="" />
 
-                <Button className="qty">{getTotalInCartItemsQuantity}</Button>
-              </Div>
+              <Button className="qty">{getTotalInCartItemsQuantity}</Button>
+              {/* </Div> */}
               {this.state.isToggleCart && (
                 <>
-                <div></div>
-                {cart.length > 0 ? (
-                  <Div className="cartContent">
-  <Text className="cartHeader">My Bag, <Span className="cartSpan">{getTotalInCartItemsQuantity} items</Span></Text>
-  {cart.map((item, index) => (
-<CartItemCard key={index} product={item?.data?.product} index={index} cart={cart}
-
-/>
-
-  ))}
-  <Text>Total</Text>
-  <CurrencyContextConsumer>
-    {({ currencyIndex }) => (
-      <p>{getTotalPrice(currencyIndex)}</p>
-    )}
-  </CurrencyContextConsumer>
-  <Div>
-    <Button className="viewBag" onClick={() => this.goToCart()}>
-      view bag
-    </Button>
-    <Button>checkout</Button>
-  </Div>
-  
+                  <BackDrop></BackDrop>
+                  <Div>
+                    {cart.length > 0 ? (
+                      <Dropdown onClick={() => this.toggleCart()}>
+                        <Div className="dropdownProducts">
+                          <Text className="cartHeader">
+                            My Bag,{" "}
+                            <Span className="cartSpan">
+                              {getTotalInCartItemsQuantity} items
+                            </Span>
+                          </Text>
+                          <Div className="products">
+                          {cart.map((item, index) => (
+                            <CartItemCard
+                              key={index}
+                              product={item?.data?.product}
+                              index={index}
+                              cart={cart}
+                            />
+                          ))}
+                          </Div>
+                          <Div className="total-price-div">
+                          <Text className="total_price_head">Total</Text>
+                          <CurrencyContextConsumer>
+                            {({ currencyIndex }) => (
+                              <Text className="total_price">{getTotalPrice(currencyIndex)}</Text>
+                            )}
+                          </CurrencyContextConsumer>
+</Div>
+                          <Div>
+                            <Button
+                              className="viewBag"
+                              onClick={() => this.goToCart()}
+                            >
+                              view bag
+                            </Button>
+                            <Button className="checkout">checkout</Button>
+                          </Div>
+                        </Div>
+                      </Dropdown>
+                    ) : (
+                      <Text>Your cart is empty</Text>
+                    )}
                   </Div>
-                ) : (
-                  <Text>Your cart is empty</Text>
-                )}
                 </>
               )}
             </Div>

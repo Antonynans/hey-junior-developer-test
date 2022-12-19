@@ -32,44 +32,52 @@ export const GET_PRODUCT = gql`
 `;
 
 export const GET_CATEGORY = gql`
-query category($input: String!) {
-category(input: {title: $input}){
-    name
-    products{
-      id
+  query category($input: String!) {
+    category(input: { title: $input }) {
       name
-      inStock
-      gallery
-      description
-      category
-      attributes{
+      products {
         id
         name
-        type
-        items{
-          displayValue
-          value
+        inStock
+        gallery
+        description
+        category
+        attributes {
           id
+          name
+          type
+          items {
+            displayValue
+            value
+            id
+          }
         }
-      }
-      prices{
-        currency{
-          label
-          symbol
+        prices {
+          currency {
+            label
+            symbol
+          }
+          amount
         }
-        amount
+        brand
       }
-      brand
     }
-
   }
-}
 `;
 
 export const GET_CATEGORIES = gql`
   query {
     categories {
       name
+    }
+  }
+`;
+
+export const GET_PRICES = gql`
+  query {
+    currencies {
+      label
+      symbol
     }
   }
 `;

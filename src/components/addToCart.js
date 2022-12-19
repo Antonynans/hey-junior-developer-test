@@ -44,24 +44,39 @@ export default class AddToCartForm extends Component {
 
                   <Div className="size-div">
                     {item.items.map((val) => (
-                      <input type="radio"
-                        key={val.value}
-                        className={
-                          val.value === this.state.size
-                            ? "small-div selected-div"
-                            : "small-div"
-                        }
-                        bgColor={item.type === "swatch" ? val.value : ""}
-                        // onMouseEnter={() =>
-                        //   this.setState({ [item.name]: val.value })
+                      // <input type="radio"
+                      //   key={val.value}
+                      //   className={
+                      //     val.value === this.state.size
+                      //       ? "small-div selected-div"
+                      //       : "small-div"
+                      //   }
+                      //   bgColor={item.type === "swatch" ? val.value : ""}
+                      //   // onMouseEnter={() =>
+                      //   //   this.setState({ [item.name]: val.value })
                           
-                        // }
-                        onChange={this.handleFormOnChange}
-                        name={item?.name}
-                        value={val?.displayValue}
+                      //   // }
+                      //   onChange={this.handleFormOnChange}
+                      //   name={item?.name}
+                      //   value={val?.displayValue}
                       
-                        // {item.id === "Color" ? "" : val.value}
-                      />
+                      //   // {item.id === "Color" ? "" : val.value}
+                      // />
+                        <Div key={val.value}                  
+                          className={
+                            val.value ===  this.state.Color
+                              ? "small-div selected-div"
+                              : "small-div" 
+                              
+                          }
+                          // className='small-div'
+                          bgColor={item.type === "swatch" ? val.value : ''}
+                          onMouseEnter={() => this.setState({ [item.name]: val.value })}
+                          // onClick={() => this.setState({ [item.name]: val.value })}
+                        >
+                          {item.id === 'Color' ? '' : val.value}
+                          {console.log(this.state)}
+                        </Div>
                     ))}
                   </Div>
                 </Div>
