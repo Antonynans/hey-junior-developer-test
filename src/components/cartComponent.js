@@ -53,7 +53,7 @@ class CartComponent extends Component {
               {/* <Div className="cartContainer"> */}
               <Img src={cartImg} alt="" className="" />
 
-              <Button className="qty">{getTotalInCartItemsQuantity}</Button>
+              <Text className="qty">{getTotalInCartItemsQuantity}</Text>
               {/* </Div> */}
               {this.state.isToggleCart && (
                 <>

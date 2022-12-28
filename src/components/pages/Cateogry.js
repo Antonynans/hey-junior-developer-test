@@ -46,6 +46,12 @@ const Div = styled.div`
     align-items: center;
     gap: 0.2rem;
   }
+  &.cat-div {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+
+  }
 `;
 
 const Img = styled.img`
@@ -76,6 +82,11 @@ const Text = styled.p`
     opacity: 0.5;
     top: 50%;
     right: 50%;
+  }
+  &.cat-head {
+    margin-bottom: 103px;
+
+    font-size: 42px;
   }
 `;
 
@@ -118,7 +129,8 @@ export class Main extends Component {
         <Navbar />
 
         <Div className="container">
-          <p>{this.categoryName()}</p>
+          <Div className='cat-div'><Text className="cat-head">{this.categoryName()}</Text></Div>
+          
           <Div className="gridDiv">
             {this.state.productData?.products?.map((item) => {
               return (

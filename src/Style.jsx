@@ -2,6 +2,7 @@ import styled from "styled-components/macro";
 import { btnColor, color1 } from "./components/addToCartStyle";
 
 export const Button = styled.button`
+  
   &.qty {
     border-radius: 50px;
     border: none;
@@ -21,7 +22,6 @@ export const Button = styled.button`
     justify-content: center;
     align-items: center;
   }
-
   /* padding: .2rem .3rem; */
   &.viewBag {
     margin-right: 12px;
@@ -124,6 +124,26 @@ export const Text = styled.p`
   font-weight: 700;
 
  }
+ &.qty {
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    background: #1d1f22;
+    color: white;
+    position: absolute;
+    font-family: "Roboto";
+    bottom: 50%;
+    left: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
 `;
 
 export const Span = styled.span`
