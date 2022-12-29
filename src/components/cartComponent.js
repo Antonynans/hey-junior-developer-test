@@ -49,18 +49,18 @@ class CartComponent extends Component {
       <div>
         <CartContextConsumer>
           {({ cart, getTotalInCartItemsQuantity, getTotalPrice }) => (
-            <Div className="mini_cart" onClick={this.toggleCart}>
-              {/* <Div className="cartContainer"> */}
+            <Div className="mini_cart" >
+              <Div className="" onClick={() => this.toggleCart()}>
               <Img src={cartImg} alt="" className="" />
 
               <Text className="qty">{getTotalInCartItemsQuantity}</Text>
-              {/* </Div> */}
+              </Div>
               {this.state.isToggleCart && (
                 <>
-                  <BackDrop></BackDrop>
+                  <BackDrop className="cart-overlay"></BackDrop>
                   <Div>
                     {cart.length > 0 ? (
-                      <Dropdown onClick={() => this.toggleCart()}>
+                      <Dropdown >
                         <Div className="dropdownProducts">
                           <Text className="cartHeader">
                             My Bag,{" "}
@@ -69,23 +69,25 @@ class CartComponent extends Component {
                             </Span>
                           </Text>
                           <Div className="products">
-                          {cart.map((item, index) => (
-                            <CartItemCard
-                              key={index}
-                              product={item?.data?.product}
-                              index={index}
-                              cart={cart}
-                            />
-                          ))}
+                            {cart.map((item, index) => (
+                              <CartItemCard
+                                key={index}
+                                product={item?.data?.product}
+                                index={index}
+                                cart={cart}
+                              />
+                            ))}
                           </Div>
                           <Div className="total-price-div">
-                          <Text className="total_price_head">Total</Text>
-                          <CurrencyContextConsumer>
-                            {({ currencyIndex }) => (
-                              <Text className="total_price">{getTotalPrice(currencyIndex)}</Text>
-                            )}
-                          </CurrencyContextConsumer>
-</Div>
+                            <Text className="total_price_head">Total</Text>
+                            <CurrencyContextConsumer>
+                              {({ currencyIndex }) => (
+                                <Text className="total_price">
+                                  {getTotalPrice(currencyIndex)}
+                                </Text>
+                              )}
+                            </CurrencyContextConsumer>
+                          </Div>
                           <Div>
                             <Button
                               className="viewBag"
@@ -98,7 +100,11 @@ class CartComponent extends Component {
                         </Div>
                       </Dropdown>
                     ) : (
-                      <Text>Your cart is empty</Text>
+                      <>
+                      <BackDrop></BackDrop>
+                      <Div className="emptyCart">Your cart is empty</Div>
+
+                      </>
                     )}
                   </Div>
                 </>

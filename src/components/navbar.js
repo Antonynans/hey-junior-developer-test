@@ -11,11 +11,11 @@ import CurrencyDropDown from "./currencyDropDown";
 // import { CartContextConsumer } from "../context/cartContext";
 
 /*
- * This is a ready to use component, just import it and plop it into your project as:
- * <Navbar/>
- * You might want to move all the style components into separate files for readability
- * if you plan to do more with it.
- */
+* This is a ready to use component, just import it and plop it into your project as:
+* <Navbar/>
+* You might want to move all the style components into separate files for readability
+* if you plan to do more with it.
+*/
 
 const Bar = styled.nav`
   font-size: 18px;
@@ -23,7 +23,6 @@ const Bar = styled.nav`
   /* position: sticky; */
   /* height: 10vh; */
   background: white;
-
   /* background-image: linear-gradient(
     260deg,
     rgb(42, 244, 152, 255) 0%,
@@ -46,7 +45,6 @@ const MainNav = styled.ul`
   flex-direction: column;
   padding: 0;
   gap: 2rem;
-
   @media (min-width: 768px) {
     display: flex !important;
     margin-right: 30px;
@@ -73,16 +71,14 @@ const NavLinks = styled(NavLink)`
   text-decoration: none;
   /* color: ${({ location, children }) =>
     location === "/category/" && children === "all" ? "#5ece7b" : "black"};
-	border-bottom: ${({ location, children }) =>
+border-bottom: ${({ location, children }) =>
     location === "/category/" && children === "all"
       ? "2px solid #5ece7b"
       : ""}; */
-
   color: #1d1f22;
   height: 3rem;
   margin-top: 1rem;
   text-transform: uppercase;
-
   /* border-bottom: 1px solid green; */
   @media (min-width: 768px) {
     margin: 0px 10px;
@@ -92,7 +88,6 @@ const NavLinks = styled(NavLink)`
     color: #5ece7b;
     transition: all 0.3s ease;
   }
-
   &.active {
     border-bottom: 2px solid #5ece7b;
     color: #5ece7b;
@@ -166,6 +161,16 @@ class Navbar extends React.PureComponent {
   }
 
   componentDidMount() {
+    this.fetchCatData();
+    // this.fetchPriceData();
+  }
+
+  // componentDidUpdate() {
+  //   this.fetchCatData();
+  //   this.fetchPriceData();
+  // }
+
+  fetchCatData() {
     const variables = {
       id: this.productIds,
     };
@@ -177,18 +182,22 @@ class Navbar extends React.PureComponent {
     }).then((data) => {
       this.setState({ productData: data });
     });
-
-    request({
-      url: "http://localhost:4000/",
-      document: GET_PRICES,
-      // variables: variables,
-    }).then((data) => {
-      this.setState({ priceData: data });
-    });
   }
 
+  // fetchPriceData() {
+  //   request({
+  //     url: "http://localhost:4000/",
+  //     document: GET_PRICES,
+  //     // variables: variables,
+  //   }).then((data) => {
+  //     this.setState({ priceData: data });
+  //   });
+  // }
+
+
+
   render() {
-    console.log(this.state.priceData, 'datata')
+    // console.log(this.state.priceData, 'datata')
 
     return (
       <Bar>
@@ -204,7 +213,7 @@ class Navbar extends React.PureComponent {
             </NavLi>
           ))}
 
-        
+       
         </MainNav>
         <svg
           width="33"

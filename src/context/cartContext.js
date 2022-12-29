@@ -49,20 +49,21 @@ class CartContextProvider extends Component {
     return symbol + sum.toFixed(2);
   };
 
-  // changeProductQuantity = (product, quantity) => {
-  //   const productToUpdate = this.state.cart.find(
-  //     (element) =>
-  //       JSON.stringify(element.attributes) ===
-  //       JSON.stringify(product.attributes)
-  //   );
+  changeProductQuantity = (product, quantity) => {
+    const productToUpdate = this.state.cart.find(
+      (element) =>
+        JSON.stringify(element.attributes) ===
+        JSON.stringify(product?.attributes)
+    );
 
-  //   let quant = (productToUpdate.quantity += quantity);
-  //   productToUpdate.quantity = quant;
+    let quant = (productToUpdate.quantity += quantity);
+    productToUpdate.quantity = quant;
 
-  //   this.setState(prev => (
-  //     {...prev}
-  //   ))
-  // }
+    this.setState(prev => (
+      {...prev}
+    ))
+  }
+
   updateCart = (id, isDecrease) => {
     const isExist = this.state.cart?.find((item) => item.id === id)
     if (!isExist) {
@@ -125,6 +126,8 @@ class CartContextProvider extends Component {
           changeProductQuantity: this.changeProductQuantity,
           getTotalInCartItemsQuantity: this.getTotalInCartItemsQuantity(),
           getTotalPrice: this.getTotalPrice,
+          increase: this.increase,
+          decrease: this.decrease,
         }}
       >
         {this.props.children}

@@ -102,6 +102,18 @@ export const Div = styled.div`
     justify-content: space-between;
     margin-bottom: 3rem;
   }
+  &.emptyCart {
+    position: absolute;
+  top: 100%;
+  right: -25px;
+  z-index: 1;
+  background-color: #fff;
+  width: 325px;
+  /* height: 677px; */
+  margin-top: 20px;
+  padding: 32px 16px;
+  cursor: default;
+  }
 `;
 
 export const Text = styled.p`

@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import { CurrencyContextConsumer } from "../context/currencyContext";
 import { Button, Div } from "./currencyDropdownStyle";
+import { request } from "graphql-request";
+import { GET_PRICES } from "../gql/Query";
 
 export default class CurrencyDropDown extends Component {
   state = {
     isOptionOpen: false,
     currentCurrency: localStorage.getItem("currencyIndex") || 0,
-    currencies: this.props.prices,
+    currencies: [],
   };
-
+ 
   toggleOverlayVisibility = () => {
     this.setState({ isOptionOpen: !this.state.isOptionOpen });
   };
@@ -26,21 +28,32 @@ export default class CurrencyDropDown extends Component {
 
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
+    this.fetchPriceData();
   }
 
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
 
+  fetchPriceData() {
+    request({
+      url: "http://localhost:4000/",
+      document: GET_PRICES,
+    }).then((data) => {
+      this.setState({
+        currencies: [...data.currencies],
+      });
+    });
+  }
+
   render() {
-   
     return (
       <CurrencyContextConsumer>
         {(context) => (
           <Div className="currency_dropdown">
-            <Button onClick={this.toggleOverlayVisibility}>
+            <Div className="symbol" onClick={this.toggleOverlayVisibility}>
               <span>
-                {/* {this.state.currencies[this.state.currentCurrency].symbol} */}
+                {this.state.currencies[this.state.currentCurrency]?.symbol}
               </span>
               {this.state.isOptionOpen ? (
                 <svg
@@ -73,21 +86,24 @@ export default class CurrencyDropDown extends Component {
                   />
                 </svg>
               )}
-            </Button>
+            </Div>
             {this.state.isOptionOpen && (
-              <Div>
-                {this.state.currencies.map((currency, index) => (
-                  <Div
-                    key={index}
-                    onClick={() => {
-                      context.changeCurrency(index);
-                      this.changeCurrency(index);
-                    }}
-                  >
-                    {currency.symbol} {currency.label}
-                  </Div>
-                ))}
-              </Div>
+              <>
+                <Div className="dropDownMenu">
+                  {this.state.currencies?.map((currency, index) => (
+                    <Div
+                      key={index}
+                      onClick={() => {
+                        context.changeCurrency(index);
+                        this.changeCurrency(index);
+                      }}
+                      className="dropDownItem"
+                    >
+                      {currency.symbol} {currency.label}
+                    </Div>
+                  ))}
+                </Div>
+              </>
             )}
           </Div>
         )}

@@ -106,6 +106,18 @@ export const Div = styled.div`
   &.gallery-div {
     display: flex;
   }
+  &.arrowImg {
+    position: relative;
+  }
+  &.arrowBtnDiv {
+    position: absolute;
+    bottom: 0;
+  }
+  &.increaseDiv {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+  }
 `;
 
 export const Divs = styled.div`
@@ -186,7 +198,8 @@ margin: 0;
 `;
 
 export const Button = styled.button`
-      width: 24px;
+&.increaseBtn {
+   width: 24px;
     height: 24px;
     font-size: 15px;
 font-weight: 600;
@@ -196,4 +209,9 @@ font-weight: 600;
   outline: none;
   /* width: 100%; */
   margin-bottom: 3rem;
+}
+     
+  &.arrowBtn {
+
+  }
 `;
