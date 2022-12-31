@@ -27,7 +27,7 @@ class CartItemCard extends Component {
 
     return (
       <CartContextConsumer>
-        {({ increase, decrease }) => (
+        {({ removeFromCart, changeProductQuantity }) => (
           <Div className="cartItemComponent">
             <Div className="cart-item" isOnCartPage={cartPage}>
               <Text className="cartText" isOnCartPage={cartPage}>
@@ -96,14 +96,21 @@ class CartItemCard extends Component {
                 <Button
                   isOnCartPage={cartPage}
                   className="increaseBtn"
-                  onClick={() => increase(this.props.product.id)}
+                  onClick={() => changeProductQuantity(this.props.product, 1)}
                 >
                   +
                 </Button>
                 <Text>{this.props.cart[this.props.index].quantity}</Text>
                 <Button
                   isOnCartPage={cartPage}
-                  onClick={() => decrease(this.props.product.id)}
+                  onClick={() =>
+                    this.props.cart[this.props.index].quantity > 1
+                      ? changeProductQuantity(this.props.product, -1)
+                      : removeFromCart(
+                          this.props.product.id,
+                          this.props.product.attributes
+                        )
+                  }
                   className="increaseBtn"
                 >
                   -
