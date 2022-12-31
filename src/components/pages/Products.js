@@ -158,13 +158,11 @@ export class Products extends Component {
       document: GET_PRODUCT,
       variables: variables,
     }).then((data) => {
-      // console.log("data", "data");
       this.setState({ productData: data });
     });
   }
 
   render() {
-    console.log(this.state, this.state.productData?.name);
 
     return (
       <>

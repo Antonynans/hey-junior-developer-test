@@ -2,9 +2,8 @@ import React from "react";
 import styled from "styled-components/macro";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
-import cart from "./assets/cart.svg";
 import { request } from "graphql-request";
-import { GET_CATEGORIES, GET_PRICES } from "../gql/Query";
+import { GET_CATEGORIES } from "../gql/Query";
 import withRouter from "./pages/withRouter";
 import CartComponent from "./cartComponent";
 import CurrencyDropDown from "./currencyDropDown";
@@ -61,7 +60,6 @@ const NavLinks = styled(NavLink)`
   height: 3rem;
   margin-top: 1rem;
   text-transform: uppercase;
-  /* border-bottom: 1px solid green; */
   @media (min-width: 768px) {
     margin: 0px 10px;
   }
@@ -77,9 +75,7 @@ const NavLinks = styled(NavLink)`
 `;
 
 const NavBarToggle = styled.span`
-  /* position: absolute;
-  top: 10px;
-  right: 20px; */
+ 
   display: flex;
   justify-content: end;
   cursor: pointer;
@@ -220,7 +216,6 @@ class Navbar extends React.PureComponent {
           <CurrencyDropDown prices={this.state.priceData?.currencies} />
           <NavLi>
             <Div>
-              {/* <Img src={cart} alt="" className="" /> */}
                 {<CartComponent />}
             </Div>
           </NavLi>
