@@ -1,7 +1,7 @@
 import styled from "styled-components/macro";
 
-export const color1 = '#1D1F22';
-export const btnColor = '#5ECE7B';
+export const color1 = "#1D1F22";
+export const btnColor = "#5ECE7B";
 
 export const Div = styled.div`
   &.container {
@@ -51,16 +51,14 @@ export const Div = styled.div`
       background: ${color1};
       color: white;
     } */
-    
   }
   &.selected-div {
-      background: ${color1};
-      color: white;
-    }
+    background: ${color1};
+    color: white;
+  }
   &.size-div {
     display: flex;
     gap: 0.2rem;
-   
   }
   &.price-div {
     display: flex;
@@ -78,68 +76,93 @@ export const Div = styled.div`
     width: 293px;
     height: 538px;
     margin-bottom: 32px;
-
   }
   &.cartItemComponent {
     display: flex;
     justify-content: space-between;
     margin-bottom: 40px;
+    border-top: 1px solid #e5e5e5;
   }
   &.cart-item {
-    width: 50%;
+    ${({ isOnCartPage }) =>
+      isOnCartPage
+        ? `width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;`
+        : `
     display: flex;
     flex-flow: column;
     align-items: flex-start;
+    width: 50%;`}
   }
   &.attr-container {
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     flex-flow: column;
     align-items: baseline;
-  };
+  }
   &.attr-div {
     display: flex;
-    /* gap: 1rem; */
     justify-content: space-between;
     width: 100%;
+    ${({ isOnCartPage }) => (isOnCartPage ? ` gap: 1rem;` : `gap: .5rem`)}
   }
   &.gallery-div {
     display: flex;
+    ${({ isOnCartPage }) => (isOnCartPage ? ` gap: 1rem;` : ``)}
   }
   &.arrowImg {
     position: relative;
   }
   &.arrowBtnDiv {
     position: absolute;
-    bottom: 0;
+    bottom: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 1rem;
   }
   &.increaseDiv {
     display: flex;
     flex-flow: column;
     justify-content: space-around;
   }
+  &.inputContainer {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 1.5em 2em;
+  }
 `;
 
 export const Divs = styled.div`
-border: 1px solid ${color1};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: ${({ bgColor }) => (bgColor ? bgColor : "transparent")};
-    width: auto;
-    min-width: 16px;
-    height: 16px;
-    padding: .2rem;
-    /* outline: ${({ name, value, currentAttributes }) =>
-		currentAttributes.some(
-			currentAttribute => Object.keys(currentAttribute)[0] === name && Object.values(currentAttribute)[0] === value,
-		) && "1px solid var(--accent-color)"}; */
+  border: 1px solid ${color1};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ bgColor }) => (bgColor ? bgColor : "transparent")};
+  width: auto;
 
+  ${({ isOnCartPage }) =>
+    isOnCartPage
+      ? `min-width: 63px;
+    height: 45px;
+    font-size: 16px;
+`
+      : `
+  min-width: 16px;
+  height: 16px;
+  padding: 0.2rem;`}
 
-    &.selected-div {
-      background: ${color1};
-      color: white;
-    }
+  &.selected-div {
+    background: ${color1};
+    color: white;
+  }
+  &.selected {
+    border: 3px solid ${color1};
+    opacity: 0.5;
+    /* color: white; */
+  }
 `;
 
 export const Img = styled.img`
@@ -164,54 +187,149 @@ export const Img = styled.img`
     transition: 0.3s ease-in-out;
   }
   &.cart-img {
-  width: 121px;
-  height: 190px;
-}
-  /* cursor: pointer; */
-  @media (min-width: 768px) {
-    width: 100%;
-  }
+    ${({ isOnCartPage }) =>
+      isOnCartPage
+        ? `    width: 200px;
+    height: 288px;`
+        : ` width: 121px;
+  height: 190px;`}
 `;
 
 export const Text = styled.p`
-margin: 0;
+  margin: 0;
 
-&.product-title {
-  font-weight: 600;
-  font-size: 30px;
-}
-&.sub-title {
-  font-weight: 400;
-  margin-top: 1rem;
-  margin-bottom: 2.5rem;
-}
-&.title-desc {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  margin-top: 1.5rem;
-  
-}
-&.desc {
-  font-family: 'Roboto', sans-serif;
-}
+  &.product-title {
+    font-weight: 600;
+    font-size: 30px;
+  }
+  &.sub-title {
+    font-weight: 400;
+    margin-top: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  &.title-desc {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin-top: 1.5rem;
+    padding-bottom: .5rem;
+  }
+  &.desc {
+    font-family: "Roboto", sans-serif;
+  }
+  &.cartText {
+    ${({ isOnCartPage }) =>
+      isOnCartPage
+        ? `font-weight: 600;
+    font-size: 30px;
+    padding: 1rem 0 .5rem;`
+        : ""}
+  }
+  &.cartName {
+    ${({ isOnCartPage }) =>
+      isOnCartPage
+        ? `font-weight: 400;
+    font-size: 30px;
+    padding-bottom: .5rem;`
+        : ""}
+  }
+  &.cartPrice {
+    ${({ isOnCartPage }) =>
+      isOnCartPage
+        ? `font-weight: 700;
+    font-size: 24px;
+    `
+        : ""}
+  }
 `;
 
 export const Button = styled.button`
-&.increaseBtn {
-   width: 24px;
+  &.addCartBtn {
+    width: 100%;
+    margin-bottom: 40px;
+    height: 3.25rem;
+    font-weight: 600;
+    border: none;
+    background-color: ${btnColor};
+    color: #fff;
+    cursor: pointer;
+    font-family: "Raleway";
+    font-size: 16px;
+  }
+  &.increaseBtn {
+    ${({ isOnCartPage }) =>
+      isOnCartPage
+        ? `
+        width: 45px;
+    height: 45px;
+    font-size: 20px;
+    font-weight: 600;
+
+    cursor: pointer;
+    border: none;
+    outline: none;`
+        : ` width: 24px;
     height: 24px;
     font-size: 15px;
-font-weight: 600;
-  /* height: 3.25rem; */
-  cursor: pointer;
-  border: none;
-  outline: none;
-  /* width: 100%; */
-  margin-bottom: 3rem;
-}
-     
-  &.arrowBtn {
+    font-weight: 600;
 
+    cursor: pointer;
+    border: none;
+    outline: none;`}
   }
+
+  &.arrowBtn {
+    background: ${color1};
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+`;
+
+export const Label = styled.label`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  font-weight: 400;
+  font-family: "Source Sans Pro";
+  background: ${(props) => props.color || "white"};
+  border: ${(props) =>
+    props.isSwatch
+      ? "1px solid black"
+      : props.color === "White"
+      ? "1px solid black"
+      : "none"};
+`;
+
+export const Input = styled.input`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  z-index: 1;
+  cursor: pointer;
+  ${({ isSwatch }) =>
+    isSwatch
+      ? `
+  &:checked + ${Label}  {
+    background: black;
+    color: white;
+  }
+  `
+      : `
+  &:checked + ${Label} {
+    outline: 1px solid #5ECE7B;
+    outline-offset: 1px;
+  }
+`}
 `;

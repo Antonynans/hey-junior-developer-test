@@ -72,7 +72,7 @@ class CartComponent extends Component {
                             {cart.map((item, index) => (
                               <CartItemCard
                                 key={index}
-                                product={item?.data?.product}
+                                product={item}
                                 index={index}
                                 cart={cart}
                               />
@@ -101,7 +101,7 @@ class CartComponent extends Component {
                       </Dropdown>
                     ) : (
                       <>
-                      <BackDrop></BackDrop>
+                      <BackDrop className="cart-overlay"></BackDrop>
                       <Div className="emptyCart">Your cart is empty</Div>
 
                       </>

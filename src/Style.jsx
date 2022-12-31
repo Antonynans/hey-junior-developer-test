@@ -2,7 +2,6 @@ import styled from "styled-components/macro";
 import { btnColor, color1 } from "./components/addToCartStyle";
 
 export const Button = styled.button`
-  
   &.qty {
     border-radius: 50px;
     border: none;
@@ -34,9 +33,9 @@ export const Button = styled.button`
     border: 1px solid ${color1};
     background-color: white;
     cursor: pointer;
-}
-&.checkout {
-  width: 140px;
+  }
+  &.checkout {
+    width: 140px;
     height: 43px;
     font-weight: 600;
     font-size: 14px;
@@ -45,9 +44,18 @@ export const Button = styled.button`
     background-color: ${btnColor};
     border: none;
     cursor: pointer;
-
-}
-  
+  }
+  &.footerBtn {
+    margin: 16px 0;
+    width: 279px;
+    height: 43px;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    background-color: ${btnColor};
+  }
 `;
 
 export const Img = styled.img``;
@@ -87,15 +95,15 @@ export const Div = styled.div`
   }
   &.products {
     margin-bottom: 32px;
-	/* width: 293px; */
-	height: 420px;
-	contain: content;
-	display: block;
-	list-style-type: none;
-	overflow: auto;
-	::-webkit-scrollbar {
-		display: none;
-	}
+    /* width: 293px; */
+    height: 420px;
+    contain: content;
+    display: block;
+    list-style-type: none;
+    overflow: auto;
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
   &.total-price-div {
     display: flex;
@@ -104,15 +112,23 @@ export const Div = styled.div`
   }
   &.emptyCart {
     position: absolute;
-  top: 100%;
-  right: -25px;
-  z-index: 1;
-  background-color: #fff;
-  width: 325px;
-  /* height: 677px; */
-  margin-top: 20px;
-  padding: 32px 16px;
-  cursor: default;
+    top: 100%;
+    right: -25px;
+    z-index: 1;
+    background-color: #fff;
+    width: 325px;
+    /* height: 677px; */
+    margin-top: 20px;
+    padding: 32px 16px;
+    cursor: default;
+  }
+  &.cart_footer_container {
+    border-top: 1px solid #e5e5e5;
+    padding-top: 1rem;
+  }
+  &.tax_div {
+    display: flex;
+    gap: 1rem;
   }
 `;
 
@@ -132,11 +148,10 @@ export const Text = styled.p`
   &.total_price_head {
     font: Roboto;
   }
- &.total_price {
-  font-weight: 700;
-
- }
- &.qty {
+  &.total_price {
+    font-weight: 700;
+  }
+  &.qty {
     border-radius: 50px;
     border: none;
     outline: none;
@@ -155,6 +170,18 @@ export const Text = styled.p`
     justify-content: center;
     align-items: center;
     margin: 0;
+  }
+  &.footer_head {
+    font-weight: 400;
+    font-size: 24px;
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+  &.footer_span {
+    font-weight: 700;
+    font-size: 24px;
+    margin: 0;
+    margin-bottom: 1rem;
   }
 `;
 

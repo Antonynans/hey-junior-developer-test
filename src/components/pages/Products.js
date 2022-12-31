@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { useQuery, gql } from '@apollo/client'
 import Navbar from "../navbar";
 import { request, gql, GraphQLClient } from "graphql-request";
 import styled from "styled-components/macro";
@@ -10,9 +9,8 @@ import { connect } from "react-redux";
 import AddToCartForm from "../addToCart";
 import DOMPurify from "dompurify";
 
-
-const color1 = '#1D1F22';
-const btnColor = '#5ECE7B';
+const color1 = "#1D1F22";
+const btnColor = "#5ECE7B";
 
 const Div = styled.div`
   &.container {
@@ -37,13 +35,11 @@ const Div = styled.div`
     width: 60%;
   }
   &.product-detail-desc {
-    /* display: flex; */
     width: 40%;
   }
   &.small-div {
     width: 63px;
     height: 45px;
-    /* padding: 0 1rem; */
     border: 1px solid ${color1};
     display: flex;
     justify-content: center;
@@ -52,18 +48,16 @@ const Div = styled.div`
     cursor: pointer;
 
     &:hover {
-      /* background-color: black; */
       border: 1px solid ${color1};
       background-color: ${({ bgColor }) => (bgColor ? bgColor : color1)};
 
       color: white;
     }
-    
   }
   &.selected-div {
-      background: ${color1};
-      color: white;
-    }
+    background: ${color1};
+    color: white;
+  }
   &.size-div {
     display: flex;
     gap: 0.2rem;
@@ -106,34 +100,33 @@ const Img = styled.img`
 `;
 
 const Text = styled.p`
-margin: 0;
+  margin: 0;
 
-&.product-title {
-  font-weight: 600;
-  font-size: 30px;
-}
-&.sub-title {
-  font-weight: 400;
-  margin-top: 1rem;
-  margin-bottom: 2.5rem;
-}
-&.title-desc {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  margin-top: 1.5rem;
-
-}
-&.desc {
-  font-family: 'Roboto', sans-serif;
-}
+  &.product-title {
+    font-weight: 600;
+    font-size: 30px;
+  }
+  &.sub-title {
+    font-weight: 400;
+    margin-top: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  &.title-desc {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin-top: 1.5rem;
+  }
+  &.desc {
+    font-family: "Roboto", sans-serif;
+  }
 `;
 
 const Button = styled.button`
   color: white;
   background-color: ${btnColor};
-color: white;
-font-weight: 600;
+  color: white;
+  font-weight: 600;
   height: 3.25rem;
   cursor: pointer;
   border: none;
@@ -141,7 +134,6 @@ font-weight: 600;
   width: 100%;
   margin-bottom: 3rem;
 `;
-
 
 export class Products extends Component {
   constructor(props) {
@@ -154,7 +146,6 @@ export class Products extends Component {
   }
 
   componentDidMount() {
-   
     const variables = {
       id: this.props.match.params.productId,
     };
@@ -169,10 +160,8 @@ export class Products extends Component {
     });
   }
 
-
   render() {
-	
-      console.log(this.state, this.state.productData?.name)
+    console.log(this.state, this.state.productData?.name);
 
     return (
       <>
@@ -206,58 +195,26 @@ export class Products extends Component {
           </Div>
 
           <Div className="product-detail-desc">
-            <Text className="product-title">{this.state.productData?.product?.brand}</Text>
-            <Text className="product-title sub-title">{this.state.productData?.product?.name}</Text>
+            <Text className="product-title">
+              {this.state.productData?.product?.brand}
+            </Text>
+            <Text className="product-title sub-title">
+              {this.state.productData?.product?.name}
+            </Text>
 
-            {/* <Div>
-              {
-                this.state.productData?.attributes?.map((item, i) => (
-                  <Div key={item.name}>
-            <Text className="title-desc">{item.id}:</Text>
-            <Div className="size-div">
-              {item.items.map((val) =>
-                // val.items.map((id, i) => (
-                  <Div key={val.value}                  
-                    className={
-                      val.value === this.state.size
-                        ? "small-div selected-div"
-                        : "small-div"
-                    }
-                    bgColor={val.value.includes('#') ? val.value : ''}
-                    onMouseEnter={() => this.setState({ size: val.value })}
-                  >
-                    {item.id === 'Color' ? '' : val.value}
-                  </Div>
-                //  ))
-              )}  
-             
-            </Div>
-           
-            </Div>
-                ))
-        }
-                    </Div> */}
+            <AddToCartForm
+              productProps={this.state.productData?.product}
+              data={this.state.productData}
+            />
 
-                    <AddToCartForm productProps={this.state.productData?.product} data={this.state.productData} />
-
-            {/* <Text className="title-desc">PRICE:</Text>
-            <Div className="price-div">
-              {/* {this.state.productData?.prices?.map((item, i) => ( */}
-                {/* <Div className="price-sub-div"> */}
-                  {/* <Text className="">{currentCurrency}</Text>
-                  <Text className="">{currentAmount}</Text> */}
-                {/* </Div> */}
-              {/* ))} */}
-            {/* </Div> */}
-
-            {/* <Button
-            								// onClick={() => inStock && this.addToCart(id, gallery, brand, name, prices, attributes)}
-                            onClick={() => this.addToCart()}
-            >ADD TO CART</Button> */}
-            <Text className="desc"  dangerouslySetInnerHTML={{
-							__html: DOMPurify.sanitize(this.state.productData.product?.description)}}>
-           
-						</Text>
+            <Text
+              className="desc"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(
+                  this.state.productData.product?.description
+                ),
+              }}
+            ></Text>
           </Div>
         </Div>
       </>

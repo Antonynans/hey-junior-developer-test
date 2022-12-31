@@ -8,29 +8,16 @@ import { GET_CATEGORIES, GET_PRICES } from "../gql/Query";
 import withRouter from "./pages/withRouter";
 import CartComponent from "./cartComponent";
 import CurrencyDropDown from "./currencyDropDown";
-// import { CartContextConsumer } from "../context/cartContext";
+import { color1 } from "./addToCartStyle";
 
-/*
-* This is a ready to use component, just import it and plop it into your project as:
-* <Navbar/>
-* You might want to move all the style components into separate files for readability
-* if you plan to do more with it.
-*/
 
 const Bar = styled.nav`
   font-size: 18px;
   padding: 0 4rem;
-  /* position: sticky; */
-  /* height: 10vh; */
+
   background: white;
-  /* background-image: linear-gradient(
-    260deg,
-    rgb(42, 244, 152, 255) 0%,
-    #3498db 100%
-  ); */
-  border: 1px solid rgba(0, 0, 0, 0.2);
+
   padding-bottom: 10px;
-  /* height: 5vh; */
   @media (min-width: 768px) {
     display: flex;
     justify-content: space-between;
@@ -69,13 +56,8 @@ const NavLinks = styled(NavLink)`
   flex-direction: column;
   justify-content: center;
   text-decoration: none;
-  /* color: ${({ location, children }) =>
-    location === "/category/" && children === "all" ? "#5ece7b" : "black"};
-border-bottom: ${({ location, children }) =>
-    location === "/category/" && children === "all"
-      ? "2px solid #5ece7b"
-      : ""}; */
-  color: #1d1f22;
+ 
+  color: ${color1};
   height: 3rem;
   margin-top: 1rem;
   text-transform: uppercase;
@@ -161,16 +143,6 @@ class Navbar extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.fetchCatData();
-    // this.fetchPriceData();
-  }
-
-  // componentDidUpdate() {
-  //   this.fetchCatData();
-  //   this.fetchPriceData();
-  // }
-
-  fetchCatData() {
     const variables = {
       id: this.productIds,
     };
@@ -182,22 +154,12 @@ class Navbar extends React.PureComponent {
     }).then((data) => {
       this.setState({ productData: data });
     });
+
+   
   }
 
-  // fetchPriceData() {
-  //   request({
-  //     url: "http://localhost:4000/",
-  //     document: GET_PRICES,
-  //     // variables: variables,
-  //   }).then((data) => {
-  //     this.setState({ priceData: data });
-  //   });
-  // }
-
-
-
   render() {
-    // console.log(this.state.priceData, 'datata')
+    console.log(this.state.priceData, 'datata')
 
     return (
       <Bar>

@@ -1,7 +1,8 @@
 body {
-  margin: 0;
   font-family: 'Raleway', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #1D1F22;
+  margin: 0 auto;
+  max-width: 1440px;
 }
