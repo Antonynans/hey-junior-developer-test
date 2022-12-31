@@ -9,7 +9,6 @@ export class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          {/* <Route exact path="/" component={Home} /> */}
           <Route path="/category/:categoryId" component={Main} />
           <Route path="/category/:categoryId" component={Main} />
 

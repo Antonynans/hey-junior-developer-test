@@ -3,20 +3,16 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-// import store from "./redux/store";
-// import { Provider } from "react-redux";
 import { CartContextProvider } from "./context/cartContext";
 import { CurrencyContextProvider } from "./context/currencyContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
       <CartContextProvider>
         <CurrencyContextProvider>
           <App />
         </CurrencyContextProvider>
       </CartContextProvider>
-    {/* </Provider> */}
   </React.StrictMode>,
   document.getElementById("root")
 );

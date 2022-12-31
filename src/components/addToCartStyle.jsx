@@ -245,7 +245,7 @@ export const Text = styled.p`
 
 export const Button = styled.button`
   &.addCartBtn {
-    width: 100%;
+    width: 60%;
     margin-bottom: 40px;
     height: 3.25rem;
     font-weight: 600;

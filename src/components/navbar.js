@@ -159,7 +159,6 @@ class Navbar extends React.PureComponent {
   }
 
   render() {
-    console.log(this.state.priceData, 'datata')
 
     return (
       <Bar>

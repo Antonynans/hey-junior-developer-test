@@ -44,7 +44,6 @@ class CartComponent extends Component {
   }
 
   render() {
-    // console.log(this.state.isToggleCart, 'toggle');
     return (
       <div>
         <CartContextConsumer>

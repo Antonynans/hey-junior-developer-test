@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import Navbar from "../navbar";
 import styled from "styled-components/macro";
-import hoverCartIcon from "../assets/hoverCartIcon.svg";
 import { request } from "graphql-request";
 import { GET_CATEGORY } from "../../gql/Query";
 import withRouter from "./withRouter";
-
+import ProductCard from "../productCard";
 
 const Divs = styled.div`
   width: 100%;
@@ -50,7 +49,6 @@ const Div = styled.div`
     display: flex;
     justify-content: flex-start;
     width: 100%;
-
   }
 `;
 
@@ -65,16 +63,7 @@ const Img = styled.img`
   }
 `;
 
-const Imgs = styled.img`
-  &.hover {
-    width: 52px;
-    height: 52px;
-    position: absolute;
-    margin-top: -2rem;
-    cursor: pointer;
-    right: 2rem;
-  }
-`;
+
 
 const Text = styled.p`
   &.outOfStock {
@@ -90,15 +79,10 @@ const Text = styled.p`
   }
 `;
 
-
 export class Main extends Component {
-  state = { productData: {} };
+  state = { productData: {}, showCart: false };
 
   componentDidMount() {
-    this.fetchData();
-  }
-
-  componentDidUpdate() {
     this.fetchData();
   }
 
@@ -124,13 +108,17 @@ export class Main extends Component {
   }
 
   render() {
+    
+    console.log(this.state.productData);
     return (
       <>
         <Navbar />
 
         <Div className="container">
-          <Div className='cat-div'><Text className="cat-head">{this.categoryName()}</Text></Div>
-          
+          <Div className="cat-div">
+            <Text className="cat-head">{this.categoryName()}</Text>
+          </Div>
+
           <Div className="gridDiv">
             {this.state.productData?.products?.map((item) => {
               return (
@@ -159,7 +147,9 @@ export class Main extends Component {
                       </>
                     )}
                     <Divs>
-                      <Imgs className="hover" src={hoverCartIcon} alt="" />
+                      
+                      <ProductCard product={item} category={item.category} />
+                      
                     </Divs>
                   </Div>
                   <p>{item.name}</p>

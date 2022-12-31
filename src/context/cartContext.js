@@ -104,15 +104,7 @@ class CartContextProvider extends Component {
     }
   }
 
-  removeFromCart = (id, attributes) => {
-   
-      // const newCartItems = this.state.cart?.filter((item) => item.id !== id || item?.attributes !== attributes);
-      // this.setState({ cart: newCartItems});
-    
-    this.setState({
-      cart: this.state.cart?.filter((item) => JSON.stringify(item?.attributes) !== JSON.stringify(attributes) || item?.id !== id),
-    });
-  };
+
 
   render() {
     localStorage.setItem("cart", [JSON.stringify({cart: this.state.cart})]);
@@ -121,7 +113,6 @@ class CartContextProvider extends Component {
         value={{
           cart: this.state.cart,
           addToCart: this.addToCart,
-          removeFromCart: this.removeFromCart,
           isItemInCart: this.isItemInCart,
           changeProductQuantity: this.changeProductQuantity,
           getTotalInCartItemsQuantity: this.getTotalInCartItemsQuantity(),

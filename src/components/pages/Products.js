@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import Navbar from "../navbar";
-import { request, gql, GraphQLClient } from "graphql-request";
+import { request } from "graphql-request";
 import styled from "styled-components/macro";
 import { GET_PRODUCT } from "../../gql/Query";
 import withRouter from "./withRouter";
-import { addToCart } from "../../redux/actions/cartSlice";
-import { connect } from "react-redux";
 import AddToCartForm from "../addToCart";
 import DOMPurify from "dompurify";
 
@@ -23,6 +21,11 @@ const Div = styled.div`
     flex-flow: column;
     gap: 2rem;
     padding-right: 2rem;
+    height: 40rem;
+    overflow: auto;
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
   &.image-container {
     @media screen and (max-width: 375px) {
