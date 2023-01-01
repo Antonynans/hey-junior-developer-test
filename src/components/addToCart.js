@@ -43,7 +43,7 @@ export default class AddToCartForm extends Component {
                               type="radio"
                               onChange={this.handleFormOnChange}
                               name={item?.name}
-                              value={val?.value}
+                              value={val?.displayValue}
                               required
                               isSwatch
                             />

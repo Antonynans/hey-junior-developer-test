@@ -20,7 +20,7 @@ class CartItemCard extends Component {
   };
 
   render() {
-    const { id, name, brand, prices, inStock, gallery, attributes } =
+    const { name, brand, prices, gallery, attributes } =
       this.props.product.data.product;
 
     const { cartPage } = this.props;
@@ -60,7 +60,7 @@ class CartItemCard extends Component {
                               Object.keys(
                                 this.props.product.attributes
                               ).indexOf(item.name)
-                            ] === val.value
+                            ] === val.displayValue
                               ? "selected-div"
                               : ""
                           }

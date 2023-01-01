@@ -255,6 +255,10 @@ export const Button = styled.button`
     cursor: pointer;
     font-family: "Raleway";
     font-size: 16px;
+
+    :disabled {
+      opacity: .5;
+    }
   }
   &.increaseBtn {
     ${({ isOnCartPage }) =>
