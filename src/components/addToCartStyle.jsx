@@ -81,7 +81,8 @@ export const Div = styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 40px;
-    border-top: 1px solid #e5e5e5;
+    ${({ isOnCartPage }) =>
+      isOnCartPage ? ` border-top: 1px solid #e5e5e5;` : ``}
   }
   &.cart-item {
     ${({ isOnCartPage }) =>
@@ -110,7 +111,12 @@ export const Div = styled.div`
   }
   &.gallery-div {
     display: flex;
-    ${({ isOnCartPage }) => (isOnCartPage ? ` gap: 1rem;` : ``)}
+    ${({ isOnCartPage }) =>
+      isOnCartPage
+        ? ` gap: 1rem;     height: 288px;
+`
+        : `height: 190px;
+`}
   }
   &.arrowImg {
     position: relative;
@@ -209,29 +215,39 @@ export const Text = styled.p`
   }
   &.title-desc {
     font-family: "Roboto", sans-serif;
-    font-weight: 700;
-    font-size: 18px;
+    padding-bottom: 0.5rem;
     margin-top: 1.5rem;
-    padding-bottom: .5rem;
+    ${({ isOnCartPage }) =>
+      isOnCartPage
+        ? ` font-weight: 700;
+    font-size: 18px;`
+        : `font-size: 14px; `}
   }
   &.desc {
     font-family: "Roboto", sans-serif;
   }
   &.cartText {
+    cursor: pointer;
     ${({ isOnCartPage }) =>
       isOnCartPage
         ? `font-weight: 600;
     font-size: 30px;
     padding: 1rem 0 .5rem;`
-        : ""}
+        : `font-weight: 300;
+    font-size: 16px;
+    display: flex;`}
   }
   &.cartName {
+    cursor: pointer;
     ${({ isOnCartPage }) =>
       isOnCartPage
         ? `font-weight: 400;
     font-size: 30px;
     padding-bottom: .5rem;`
-        : ""}
+        : `font-size: 16px;
+        display: flex;
+        padding: 0.5rem 0;
+`}
   }
   &.cartPrice {
     ${({ isOnCartPage }) =>
@@ -257,7 +273,7 @@ export const Button = styled.button`
     font-size: 16px;
 
     :disabled {
-      opacity: .5;
+      opacity: 0.5;
     }
   }
   &.increaseBtn {

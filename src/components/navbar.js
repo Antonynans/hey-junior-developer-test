@@ -8,20 +8,19 @@ import withRouter from "./pages/withRouter";
 import CartComponent from "./cartComponent";
 import CurrencyDropDown from "./currencyDropDown";
 import { color1 } from "./addToCartStyle";
-import logo from './assets/logo.svg';
+import logo from "./assets/logo.svg";
 
 const Bar = styled.nav`
   font-size: 18px;
-  padding: 0 4rem;
-
+  margin: 0 3rem;
   background: white;
-
   padding-bottom: 10px;
+
   @media (min-width: 768px) {
     display: flex;
     justify-content: space-between;
     padding-bottom: 0;
-    height: 70px;
+    height: 80px;
     align-items: center;
   }
 `;
@@ -42,7 +41,6 @@ const MainNav = styled.ul`
 `;
 const NavLi = styled.li`
   text-align: center;
-  /* margin: auto; */
   @media (min-width: 768px) {
     height: 100%;
     display: flex;
@@ -55,7 +53,7 @@ const NavLinks = styled(NavLink)`
   flex-direction: column;
   justify-content: center;
   text-decoration: none;
- 
+
   color: ${color1};
   height: 3rem;
   margin-top: 1rem;
@@ -75,7 +73,6 @@ const NavLinks = styled(NavLink)`
 `;
 
 const NavBarToggle = styled.span`
- 
   display: flex;
   justify-content: end;
   cursor: pointer;
@@ -85,30 +82,16 @@ const NavBarToggle = styled.span`
     position: absolute;
   }
 `;
-const Img = styled.img`
-  cursor: pointer;
-  @media (min-width: 768px) {
-    width: 100%;
-  }
-`;
 
 const Div = styled.div`
   position: relative;
 `;
-const Button = styled.button`
-  border-radius: 50px;
-  border: none;
-  outline: none;
-  background: blue;
-  color: white;
-  position: absolute;
-  top: -15%;
-  left: 50%;
-  /* padding: .2rem .3rem; */
-`;
 
-const Text = styled.p`
-  margin: 0;
+const Container = styled.div`
+  position: fixed;
+  width: 100%;
+  max-width: 1440px;
+  z-index: 100;
 `;
 
 const Hamburger = styled.img`
@@ -150,41 +133,36 @@ class Navbar extends React.PureComponent {
     }).then((data) => {
       this.setState({ productData: data });
     });
-
-   
   }
 
   render() {
-
     return (
-      <Bar>
-        <NavBarToggle onClick={() => this.toggleNavBar()}>
-          <Hamburger />
-        </NavBarToggle>
-        <MainNav display={this.state.displayNav}>
-          {this.state.productData.categories?.map(({ name }, i) => (
-            <NavLi key={i}>
-              <NavLinks to={`/category/${name}`} key={i}>
-                {name}
-              </NavLinks>
+      <Container>
+        <Bar>
+          <NavBarToggle onClick={() => this.toggleNavBar()}>
+            <Hamburger />
+          </NavBarToggle>
+          <MainNav display={this.state.displayNav}>
+            {this.state.productData.categories?.map(({ name }, i) => (
+              <NavLi key={i}>
+                <NavLinks to={`/category/${name}`} key={i}>
+                  {name}
+                </NavLinks>
+              </NavLi>
+            ))}
+          </MainNav>
+          <Link to="/">
+            <img src={logo} alt="" />
+          </Link>
+
+          <MainNav display={this.state.displayNav}>
+            <CurrencyDropDown prices={this.state.priceData?.currencies} />
+            <NavLi>
+              <Div>{<CartComponent />}</Div>
             </NavLi>
-          ))}
-
-       
-        </MainNav>
-        <Link to='/'>
-        <img src={logo} alt=''  />
-</Link>
-
-        <MainNav display={this.state.displayNav}>
-          <CurrencyDropDown prices={this.state.priceData?.currencies} />
-          <NavLi>
-            <Div>
-                {<CartComponent />}
-            </Div>
-          </NavLi>
-        </MainNav>
-      </Bar>
+          </MainNav>
+        </Bar>
+      </Container>
     );
   }
 }

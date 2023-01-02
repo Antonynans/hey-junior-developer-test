@@ -8,7 +8,6 @@ import AddToCartForm from "../addToCart";
 import DOMPurify from "dompurify";
 
 const color1 = "#1D1F22";
-const btnColor = "#5ECE7B";
 
 const Div = styled.div`
   &.container {
@@ -123,19 +122,6 @@ const Text = styled.p`
   &.desc {
     font-family: "Roboto", sans-serif;
   }
-`;
-
-const Button = styled.button`
-  color: white;
-  background-color: ${btnColor};
-  color: white;
-  font-weight: 600;
-  height: 3.25rem;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  width: 100%;
-  margin-bottom: 3rem;
 `;
 
 export class Products extends Component {

@@ -20,7 +20,7 @@ class CartItemCard extends Component {
   };
 
   render() {
-    const { name, brand, prices, gallery, attributes } =
+    const { id, name, brand, prices, gallery, attributes } =
       this.props.product.data.product;
 
     const { cartPage } = this.props;
@@ -28,15 +28,17 @@ class CartItemCard extends Component {
     return (
       <CartContextConsumer>
         {({ removeFromCart, changeProductQuantity }) => (
-          <Div className="cartItemComponent">
+          <Div className="cartItemComponent" isOnCartPage={cartPage}>
             <Div className="cart-item" isOnCartPage={cartPage}>
-              <Text className="cartText" isOnCartPage={cartPage}>
-                {brand}
-              </Text>
-              <Text className="cartName" isOnCartPage={cartPage}>
-                {" "}
-                {name}
-              </Text>
+              <div onClick={() => this.props.history.push(`/product/${id}`)}>
+                <Text className="cartText" isOnCartPage={cartPage}>
+                  {brand}
+                </Text>
+                <Text className="cartName" isOnCartPage={cartPage}>
+                  {" "}
+                  {name}
+                </Text>
+              </div>
               <CurrencyContextConsumer>
                 {({ currencyIndex }) => (
                   <Text className="cartPrice" isOnCartPage={cartPage}>
@@ -48,7 +50,7 @@ class CartItemCard extends Component {
               {attributes?.map((item) => (
                 <Div key={item.name} className="attr-container">
                   {/* <div> */}
-                  <Text className="title-desc">{item.name}:</Text>
+                  <Text className="title-desc" isOnCartPage={cartPage}>{item.name}:</Text>
                   {item.type !== "swatch" ? (
                     <Div className="attr-div" isOnCartPage={cartPage}>
                       {item.items.map((val) => (

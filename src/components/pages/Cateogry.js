@@ -73,7 +73,7 @@ const Text = styled.p`
     right: 50%;
   }
   &.cat-head {
-    margin-bottom: 103px;
+    margin: 5rem 0;
 
     font-size: 42px;
   }
