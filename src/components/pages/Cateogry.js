@@ -85,6 +85,9 @@ export class Main extends Component {
   componentDidMount() {
     this.fetchData();
   }
+  componentDidUpdate() {
+    this.fetchData();
+  }
 
   fetchData() {
     const variables = {
