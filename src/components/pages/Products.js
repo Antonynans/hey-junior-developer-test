@@ -14,6 +14,7 @@ const Div = styled.div`
     padding: 2rem 4rem;
     display: flex;
     justify-content: space-between;
+    padding-top: 5rem;
   }
   &.small-images-container {
     display: flex;

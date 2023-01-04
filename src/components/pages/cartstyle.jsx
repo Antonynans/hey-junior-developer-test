@@ -9,6 +9,7 @@ export const Div = styled.div`
     display: flex;
     flex-flow: column;
     justify-content: space-between;
+    padding-top: 5rem;
   }
   &.emptyCart {
     display: flex;
