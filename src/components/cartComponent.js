@@ -48,18 +48,22 @@ class CartComponent extends Component {
       <div>
         <CartContextConsumer>
           {({ cart, getTotalInCartItemsQuantity, getTotalPrice }) => (
-            <Div className="mini_cart" >
+            <Div className="mini_cart">
               <Div className="" onClick={() => this.toggleCart()}>
-              <Img src={cartImg} alt="" className="" />
-
-              <Text className="qty">{getTotalInCartItemsQuantity}</Text>
+                <Img src={cartImg} alt="" className="" />
+                {getTotalInCartItemsQuantity > 0 ? (
+                  <Text className="qty">{getTotalInCartItemsQuantity}</Text>
+                ) : (
+                  ""
+                )}
               </Div>
+
               {this.state.isToggleCart && (
                 <>
                   <BackDrop className="cart-overlay"></BackDrop>
                   <Div>
                     {cart.length > 0 ? (
-                      <Dropdown >
+                      <Dropdown>
                         <Div className="dropdownProducts">
                           <Text className="cartHeader">
                             My Bag,{" "}
@@ -100,9 +104,8 @@ class CartComponent extends Component {
                       </Dropdown>
                     ) : (
                       <>
-                      <BackDrop className="cart-overlay"></BackDrop>
-                      <Div className="emptyCart">Your cart is empty</Div>
-
+                        <BackDrop className="cart-overlay"></BackDrop>
+                        <Div className="emptyCart">Your cart is empty</Div>
                       </>
                     )}
                   </Div>

@@ -32,7 +32,7 @@ export default class AddToCartForm extends Component {
             >
               {productProps?.attributes?.map((item) => (
                 <Div key={item.name}>
-                  <Text className="title-desc">{item.name}:</Text>
+                  <Text className="title-desc title">{item.name}:</Text>
 
                   <Div className="size-div">
                     {item.items.map((val) => (
@@ -72,7 +72,7 @@ export default class AddToCartForm extends Component {
               <CurrencyContextConsumer>
                 {({ currencyIndex }) => (
                   <>
-                    <Text className="title-desc">PRICE:</Text>
+                    <Text className="title-desc title">PRICE:</Text>
                     <Div className="price-div">
                       <Div className="price-sub-div">
                         {productProps?.prices[currencyIndex].currency.symbol}

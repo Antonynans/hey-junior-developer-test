@@ -223,6 +223,10 @@ export const Text = styled.p`
     font-size: 18px;`
         : `font-size: 14px; `}
   }
+  &.title {
+    font-weight: 700;
+    font-size: 18px;
+  }
   &.desc {
     font-family: "Roboto", sans-serif;
   }

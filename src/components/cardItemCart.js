@@ -50,7 +50,9 @@ class CartItemCard extends Component {
               {attributes?.map((item) => (
                 <Div key={item.name} className="attr-container">
                   {/* <div> */}
-                  <Text className="title-desc" isOnCartPage={cartPage}>{item.name}:</Text>
+                  <Text className="title-desc" isOnCartPage={cartPage}>
+                    {item.name}:
+                  </Text>
                   {item.type !== "swatch" ? (
                     <Div className="attr-div" isOnCartPage={cartPage}>
                       {item.items.map((val) => (
